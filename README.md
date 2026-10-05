@@ -1,9 +1,4 @@
 <div align="center">
-  
-  <!-- Цветовые плашки-баннеры для стиля -->
-  <img src="https://shields.io" alt="Палитра">
-  <img src="https://shields.io" alt="Стек">
-  <img src="https://shields.io" alt="Лицензия">
 
   <br>
 
