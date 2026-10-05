@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#606c38 × #fefae0 — земляный эко-минимализм в двух цветах</title>
+<meta name="description" content="Интерактивная статья о паре оливкового #606c38 и кремового #fefae0: контраст, психология цвета, сферы применения, таблица сравнения и анимированные SVG-сцены.">
+<link rel="stylesheet" href="styles.css">
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+
+<!-- ============================================================
+     SVG-фильтры: текстура мятой бумаги (чистый CSS-фильтр)
+     ============================================================ -->
+<svg class="art-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- мелкое зерно: RGB принудительно = #606c38, шум идёт в альфу -->
+    <filter id="grainFineL" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="
+        0 0 0 0 0.376
+        0 0 0 0 0.424
+        0 0 0 0 0.220
+        0.30 0.30 0.30 0 -0.34"/>
+    </filter>
+    <!-- крупная мятая волна / заломы -->
+    <filter id="grainCoarseL" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="3" seed="5" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="
+        0 0 0 0 0.376
+        0 0 0 0 0.424
+        0 0 0 0 0.220
+        0.45 0.45 0.45 0 -0.52"/>
+    </filter>
+
+    <!-- тёмная тема: те же две краски, но зерно кремовое -->
+    <filter id="grainFineD" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="
+        0 0 0 0 0.996
+        0 0 0 0 0.980
+        0 0 0 0 0.878
+        0.26 0.26 0.26 0 -0.28"/>
+    </filter>
+    <filter id="grainCoarseD" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="3" seed="5" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="
+        0 0 0 0 0.996
+        0 0 0 0 0.980
+        0 0 0 0 0.878
+        0.40 0.40 0.40 0 -0.42"/>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ============================================================
+     Фон: помятая бумага (градиенты + зерно)
+     ============================================================ -->
+<div class="paper" aria-hidden="true">
+  <div class="paper__creases"></div>
+  <svg class="paper__noise" focusable="false" preserveAspectRatio="none">
+    <!-- fill-opacity=0 — страховка: если фильтр не применится, зерна просто нет -->
+    <rect class="grain grain--fine--l"   width="100%" height="100%" fill-opacity="0" filter="url(#grainFineL)"/>
+    <rect class="grain grain--coarse--l" width="100%" height="100%" fill-opacity="0" filter="url(#grainCoarseL)"/>
+    <rect class="grain grain--fine--d"   width="100%" height="100%" fill-opacity="0" filter="url(#grainFineD)"/>
+    <rect class="grain grain--coarse--d" width="100%" height="100%" fill-opacity="0" filter="url(#grainCoarseD)"/>
+  </svg>
+</div>
+
+<!-- прогресс чтения -->
+<div class="progress" aria-hidden="true">
+  <span class="progress__bar" id="progressBar"></span>
+</div>
+
+<header class="header" id="header">
+  <a class="logo" href="#top">
+    <span class="logo__chip" aria-hidden="true"></span>
+    <span>Олива&nbsp;×&nbsp;Крем</span>
+  </a>
+
+  <nav class="nav" id="nav">
+    <a href="#pair">Пара</a>
+    <a href="#psychology">Психология</a>
+    <a href="#compare">Таблица</a>
+    <a href="#apply">Применение</a>
+    <a href="#recipe">Рецепт</a>
+  </nav>
+
+  <button class="swap" id="swapTheme" type="button" aria-pressed="false" title="Поменять цвета местами">
+    <span class="swap__ring" aria-hidden="true"></span>
+    <span class="swap__a" aria-hidden="true"></span>
+    <span class="swap__b" aria-hidden="true"></span>
+    <span class="sr-only">Поменять цвета местами</span>
+  </button>
+</header>
+
+<main id="top">
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero reveal" id="hero">
+    <p class="eyebrow">Интерактивная статья · 7 минут чтения</p>
+
+    <div class="hero__art" aria-hidden="true">
+      <svg class="art-pattern" viewBox="0 0 200 60" focusable="false">
+        <g class="art-stroke" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M4 30 C 24 6, 44 54, 64 30 S 104 6, 124 30 S 164 54, 196 22"/>
+          <path d="M4 46 C 28 30, 52 58, 76 44 S 120 24, 148 42 S 180 52, 196 40"/>
+        </g>
+      </svg>
+    </div>
+
+    <h1>Два цвета,<br>из которых<br>собрано всё</h1>
+
+    <p class="lead">
+      <span class="swatch-inline" data-hex="#606c38" title="Скопировать #606c38" tabindex="0" role="button"></span>
+      оливковый и
+      <span class="swatch-inline" data-hex="#fefae0" title="Скопировать #fefae0" tabindex="0" role="button"></span>
+      кремовый. Ни одной третьей краски на всей странице — только прозрачности
+      этих двух цветов, фактура бумаги, воздух и типографика.
+    </p>
+
+    <div class="hero__actions">
+      <a class="btn btn-solid" href="#compare">Смотреть сравнение</a>
+      <a class="btn btn-ghost" href="#recipe">Как сочетать</a>
+    </div>
+
+    <div class="hero__meta">
+      <span>HEX <b>#606c38</b></span>
+      <span>HEX <b>#fefae0</b></span>
+      <span>контраст <b>5.40:1</b></span>
+      <span>WCAG <b>AA</b></span>
+    </div>
+
+    <svg class="art-scrollhint" viewBox="0 0 24 40" aria-hidden="true" focusable="false">
+      <rect class="art-draw" x="4" y="3" width="16" height="26" rx="8"
+            fill="none" stroke="currentColor" stroke-width="2"/>
+      <circle class="art-drop" cx="12" cy="10" r="2.5" fill="currentColor"/>
+    </svg>
+  </section>
+
+  <!-- ============================ ПАРА ============================ -->
+  <section class="band reveal" id="pair">
+    <h2>Почему именно эта пара</h2>
+    <p>
+      Оливковый <code>#606c38</code> — не «зелёный из палитры», а цвет, который
+      human-центристами называют <b>pistachio</b>. Он берёт у овощей зелень,
+      у земли — глубину, у мха — спокойствие. Он темнее, чем кажется, и
+      идеально держит текст на светлом фоне.
+    </p>
+    <p>
+      Кремовый <code>#fefae0</code> — не чистый белый. Чистый белый утомляет и
+      «светится» на OLED, крем же отражает на 2–3% мягче: он даёт тепло,
+      сохраняет контраст и ощущается дороже.
+    </p>
+
+    <div class="split">
+      <article class="color-card reveal" data-delay="1" data-hex="#606c38" tabindex="0" role="button" title="Скопировать #606c38">
+        <div class="color-card__chip">
+          <svg class="art-leaf" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path class="art-draw" d="M20 34 C 8 30, 6 18, 10 8 C 22 10, 30 18, 30 26 C 30 31, 25 34, 20 34 Z"/>
+              <path class="art-draw" d="M20 34 C 20 24, 17 16, 11 9"/>
+              <path class="art-draw" d="M20 27 L 26 20 M20 31 L 27 28"/>
+            </g>
+          </svg>
+          <span class="copy">копировать</span>
+        </div>
+        <h3>#606c38</h3>
+        <dl>
+          <div><dt>Роль</dt><dd>Тёмная. Текст, рамки, акценты, инверсные блоки</dd></div>
+          <div><dt>RGB</dt><dd>96 · 108 · 56</dd></div>
+          <div><dt>Настроение</dt><dd>Земляное, тихое, честное, «своё»</dd></div>
+        </dl>
+      </article>
+
+      <article class="color-card color-card--light reveal" data-delay="2" data-hex="#fefae0" tabindex="0" role="button" title="Скопировать #fefae0">
+        <div class="color-card__chip">
+          <svg class="art-leaf" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle class="art-pulse" cx="20" cy="20" r="12"/>
+              <path class="art-draw" d="M20 8 L 31 20 L 20 32 L 9 20 Z"/>
+              <path class="art-draw" d="M20 8 L 20 32 M9 20 L 31 20"/>
+            </g>
+          </svg>
+          <span class="copy">копировать</span>
+        </div>
+        <h3>#fefae0</h3>
+        <dl>
+          <div><dt>Роль</dt><dd>Светлая. Фон, поверхности, поля ввода</dd></div>
+          <div><dt>RGB</dt><dd>254 · 250 · 224</dd></div>
+          <div><dt>Настроение</dt><dd>Тёплое, мягкое, премиальное</dd></div>
+        </dl>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========================= ПСИХОЛОГИЯ ========================= -->
+  <section class="band reveal" id="psychology">
+    <h2>Что палитра делает с человеком</h2>
+    <p class="lead-text">
+      Оливковый снижает пульс восприятия: в нём нет ни чистого красного
+      «тревоги», ни синего «холода». Он читается как природа, но без
+      пафоса — поэтому работает и в студии, и в e-commerce, и в игре.
+    </p>
+
+    <div class="cards">
+      <article class="card reveal" data-delay="1">
+        <svg class="art-marker" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path class="art-draw" d="M3 12 C 3 6, 9 3, 12 3 C 15 3, 21 6, 21 12 C 21 18, 16 21, 12 21 C 8 21, 3 18, 3 12 Z"/>
+            <circle class="art-pulse" cx="12" cy="12" r="3.5"/>
+          </g>
+        </svg>
+        <span class="card__num">01</span>
+        <h3>Комфорт для глаз</h3>
+        <p>Низкая насыщенность и отсутствие чистого белого убирают
+           «жёсткий край» страницы. Глаз меньше устаёт, текст читается
+           в 2–3 раза дольше без переключения вкладок.</p>
+      </article>
+
+      <article class="card reveal" data-delay="2">
+        <svg class="art-marker" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path class="art-draw" d="M3 16 C 7 16, 9 9, 13 9 C 17 9, 17 14, 21 14"/>
+            <path class="art-draw" d="M3 20 C 8 20, 10 13, 14 13 C 18 13, 18 17, 21 17"/>
+            <circle class="art-pulse" cx="13" cy="9" r="2.5"/>
+          </g>
+        </svg>
+        <span class="card__num">02</span>
+        <h3>Ощущение земли</h3>
+        <p>Оттенок ассоциативно связан с почвой, глиной, сушёными
+           травами. Интерфейс перестаёт быть «пластиковым» и начинает
+           ощущаться материальным.</p>
+      </article>
+
+      <article class="card reveal" data-delay="3">
+        <svg class="art-marker" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path class="art-draw" d="M12 3 L 20 9 L 20 16 L 12 21 L 4 16 L 4 9 Z"/>
+            <path class="art-draw" d="M12 3 L 12 12 L 20 16 M12 12 L 4 16 M12 12 L 20 9"/>
+          </g>
+        </svg>
+        <span class="card__num">03</span>
+        <h3>Премиальность</h3>
+        <p>Крем — признак «бумажной» роскоши: он встречается в упаковке,
+           парфюмерии, печатных каталогах. С оливковым он даёт сдержанную,
+           не кричащую дороговизну.</p>
+      </article>
+
+      <article class="card reveal" data-delay="4">
+        <svg class="art-marker" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect class="art-draw" x="4" y="4" width="7" height="7" rx="1.5"/>
+            <rect class="art-draw" x="13" y="4" width="7" height="7" rx="1.5"/>
+            <rect class="art-draw" x="4" y="13" width="7" height="7" rx="1.5"/>
+            <rect class="art-pulse" x="13" y="13" width="7" height="7" rx="1.5"/>
+          </g>
+        </svg>
+        <span class="card__num">04</span>
+        <h3>Эко-минимализм</h3>
+        <p>Два цвета — это сознательное ограничение. Такая палитра
+           честно говорит: здесь важны структура, воздух и типографика,
+           а не количество заливок.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- =========================== ТАБЛИЦА =========================== -->
+  <section class="band band--invert reveal" id="compare">
+    <h2>Сравнительная таблица</h2>
+    <p class="section-sub">
+      Один параметр — одна строка. Наведи курсор на строку или кликни,
+      чтобы подсветить её целиком; клик по HEX копирует значение.
+    </p>
+
+    <div class="table-wrap">
+      <table class="compare" id="compareTable">
+        <caption class="sr-only">Сравнение цветов #606c38 и #fefae0 по техническим и воспринимаемым параметрам</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="th-param">Параметр</th>
+            <th scope="col"><span class="chip chip--dark"></span>#606c38</th>
+            <th scope="col"><span class="chip chip--light"></span>#fefae0</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-cell="tint">
+            <th scope="row">HEX</th>
+            <td data-copy="#606c38" tabindex="0" role="button" title="Скопировать">#606c38</td>
+            <td data-copy="#fefae0" tabindex="0" role="button" title="Скопировать">#fefae0</td>
+          </tr>
+          <tr>
+            <th scope="row">RGB</th>
+            <td>96 · 108 · 56</td>
+            <td>254 · 250 · 224</td>
+          </tr>
+          <tr data-cell="contrast">
+            <th scope="row">Контрастность</th>
+            <td>5.40:1 — AA для текста</td>
+            <td>5.40:1 — фон, на котором текст читается</td>
+          </tr>
+          <tr>
+            <th scope="row">Светлота</th>
+            <td>~13.5% — тёмный, контрастный</td>
+            <td>~94.8% — светлый, воздушный</td>
+          </tr>
+          <tr data-cell="psych">
+            <th scope="row">Восприятие</th>
+            <td>Спокойствие, честность, природа, «своё»</td>
+            <td>Тепло, чистота, премиальность, бумага</td>
+          </tr>
+          <tr>
+            <th scope="row">Эмоция</th>
+            <td>Успокаивает, заземляет</td>
+            <td>Смягчает, обволакивает</td>
+          </tr>
+          <tr data-cell="web">
+            <th scope="row">Веб</th>
+            <td>Текст, кнопки, иконки, границы, футер</td>
+            <td>Фон страницы, карточки, поля, hover-заливки</td>
+          </tr>
+          <tr>
+            <th scope="row">Геймдев</th>
+            <td>Интерфейс, полоса здоровья, карта, тени</td>
+            <td>Освещение, HUD-панели, текст поверх тёмного</td>
+          </tr>
+          <tr>
+            <th scope="row">Интерьер</th>
+            <td>Стены, мебель, текстиль, декор</td>
+            <td>Пол, потолок, бумага, свет, посуда</td>
+          </tr>
+          <tr data-cell="pairing">
+            <th scope="row">Как дополняют</th>
+            <td>Держит контраст: даёт структуру и вес</td>
+            <td>Даёт воздух: отступает, чтобы тёмное читалось</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="section-sub">
+      Одна строка — один смысл. В сумме: тёмное задаёт иерархию, светлое
+      даёт ей место. Без кремового оливковый «кричит», без оливкового
+      кремовый «исчезает».
+    </p>
+  </section>
+
+  <!-- ========================= ПРИМЕНЕНИЕ ========================= -->
+  <section class="band reveal" id="apply">
+    <h2>Где пара работает</h2>
+    <p class="lead-text">Нажми на вкладку: сцены оживают, когда попадают в поле зрения.</p>
+
+    <div class="tabs" data-tabs>
+      <div class="tabs__list" role="tablist" aria-label="Сферы применения">
+        <button class="tab is-active" role="tab" aria-selected="true" aria-controls="tab-web" id="btn-web" type="button">Веб</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="tab-game" id="btn-game" type="button" tabindex="-1">Геймдев</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="tab-interior" id="btn-interior" type="button" tabindex="-1">Интерьер</button>
+      </div>
+
+      <!-- ---------- СЦЕНА 1: ВЕБ ---------- -->
+      <div class="tabs__panel is-active" role="tabpanel" id="tab-web" aria-labelledby="btn-web">
+        <div class="scene-wrap reveal" data-scene>
+          <svg class="scene scene-web" viewBox="0 0 320 190" role="img"
+               aria-label="Схема веб-страницы: рамка браузера с пульсирующими строками кода и бегущей волной">
+            <rect class="art-surface" x="8" y="8" width="304" height="174" rx="14"
+                  fill="none" stroke="currentColor" stroke-width="2"/>
+            <path class="art-surface" d="M8 40 H 312" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+            <circle class="art-surface art-dot" cx="26" cy="24" r="4" fill="currentColor"/>
+            <circle class="art-surface art-dot" cx="40" cy="24" r="4" fill="currentColor" opacity="0.7"/>
+            <circle class="art-surface art-dot" cx="54" cy="24" r="4" fill="currentColor" opacity="0.45"/>
+
+            <g class="art-surface art-wave" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <path d="M30 118 C 62 74, 94 162, 126 118 S 190 74, 222 118 S 286 162, 300 132"/>
+            </g>
+
+            <g class="art-surface art-code" fill="currentColor">
+              <rect class="art-bar" x="30" y="56" width="120" height="7" rx="3.5"/>
+              <rect class="art-bar" x="30" y="72" width="76" height="7" rx="3.5" opacity="0.7"/>
+              <rect class="art-bar" x="30" y="88" width="150" height="7" rx="3.5" opacity="0.5"/>
+              <rect class="art-bar art-bar--accent" x="196" y="56" width="64" height="23" rx="11.5"/>
+            </g>
+            <rect class="art-caret" x="212" y="60" width="3" height="15" rx="1.5" fill="currentColor"/>
+          </svg>
+        </div>
+
+        <h3>Сайты, лендинги, SaaS-интерфейсы</h3>
+        <ul class="list">
+          <li><b>Фон — кремовый.</b> Тёмное используется только для текста, рамок и акцентов.</li>
+          <li><b>Кнопка — инверсная.</b> Заливка <code>#606c38</code>, подпись <code>#fefae0</code>.</li>
+          <li><b>Ховер — прозрачность.</b> Тот же оливковый, но 10–15% прозрачности.</li>
+          <li><b>Тени.</b> Только <code>rgba(96, 108, 56, …)</code> — они не окрашивают фон.</li>
+          <li><b>Инверсные блоки.</b> Фон оливковый, текст кремовый — ритм без третьего цвета.</li>
+        </ul>
+      </div>
+
+      <!-- ---------- СЦЕНА 2: ГЕЙМДЕВ ---------- -->
+      <div class="tabs__panel" role="tabpanel" id="tab-game" aria-labelledby="btn-game" hidden>
+        <div class="scene-wrap reveal" data-scene>
+          <svg class="scene scene-game" viewBox="0 0 320 190" role="img"
+               aria-label="Радар с вращающимся лучом и движущимся маркером пути">
+            <g class="art-surface">
+              <circle cx="96" cy="95" r="74" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+              <circle cx="96" cy="95" r="48" fill="none" stroke="currentColor" stroke-width="2" opacity="0.28"/>
+              <circle cx="96" cy="95" r="22" fill="none" stroke="currentColor" stroke-width="2" opacity="0.22"/>
+              <path d="M22 95 H 170 M96 21 V 169" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.18"/>
+              <g class="art-sweep">
+                <path d="M96 95 L 168 95 A 72 72 0 0 0 96 23 Z" fill="currentColor" stroke="none" opacity="0.16"/>
+                <path d="M96 95 L 170 95" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              </g>
+              <circle class="art-blip" cx="130" cy="70" r="5" fill="currentColor" stroke="none"/>
+            </g>
+
+            <g class="art-surface">
+              <rect x="196" y="20" width="112" height="150" rx="12"
+                    fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+              <path class="art-path" d="M212 150 C 236 150, 240 108, 258 108 S 288 60, 300 60"
+                    fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-dasharray="7 9"/>
+              <g class="art-mover">
+                <circle cx="212" cy="150" r="7" fill="currentColor" stroke="none"/>
+                <circle class="art-halo" cx="212" cy="150" r="13" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+              </g>
+              <circle cx="300" cy="60" r="4" fill="currentColor" stroke="none" opacity="0.6"/>
+              <rect x="212" y="30" width="58" height="7" rx="3.5" fill="currentColor" stroke="none" opacity="0.5"/>
+              <rect x="212" y="44" width="34" height="7" rx="3.5" fill="currentColor" stroke="none" opacity="0.3"/>
+            </g>
+          </svg>
+        </div>
+
+        <h3>Интерфейсы, HUD, карта</h3>
+        <ul class="list">
+          <li><b>Карта.</b> Земля и трава — оливковый, полосы пути — кремовые.</li>
+          <li><b>HUD.</b> Полупрозрачная кремовая панель 80% и оливковая рамка.</li>
+          <li><b>Здоровье.</b> Оливковая заливка на кремовой шкале — читается без градиентов.</li>
+          <li><b>Тени объектов.</b> <code>rgba(96, 108, 56, 0.25)</code> вместо чёрных.</li>
+          <li><b>Экран паузы.</b> Кремовая панель 92% на оливковой подложке.</li>
+        </ul>
+      </div>
+
+      <!-- ---------- СЦЕНА 3: ИНТЕРЬЕР ---------- -->
+      <div class="tabs__panel" role="tabpanel" id="tab-interior" aria-labelledby="btn-interior" hidden>
+        <div class="scene-wrap reveal" data-scene>
+          <svg class="scene scene-interior" viewBox="0 0 320 190" role="img"
+               aria-label="Комната: окно с тёплым светом и колышущийся фикус">
+            <g class="art-surface">
+              <path d="M14 172 H 306" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+              <rect x="30" y="26" width="104" height="88" rx="8" fill="none"
+                    stroke="currentColor" stroke-width="2"/>
+              <path d="M82 26 V 114 M30 70 H 134" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"/>
+              <g class="art-sun">
+                <path d="M46 96 L 118 52" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.35"/>
+                <path d="M60 110 L 132 66" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.22"/>
+              </g>
+            </g>
+
+            <g class="art-surface">
+              <path d="M232 172 L 216 96 H 268 L 252 172 Z" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <g class="art-plant" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path class="art-draw" d="M242 96 C 242 74, 236 58, 224 46"/>
+                <path class="art-draw" d="M242 96 C 244 72, 254 58, 268 50"/>
+                <path class="art-draw" d="M242 90 C 232 80, 222 76, 212 78"/>
+                <path class="art-draw" d="M243 86 C 252 78, 262 78, 272 82"/>
+                <path class="art-draw" d="M242 96 L 242 66"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <h3>Стены, мебель, текстиль</h3>
+        <ul class="list">
+          <li><b>Стены — оливковый.</b> Он даёт комнате глубину и уменьшает её визуально.</li>
+          <li><b>Пол и потолок — кремовый.</b> Отражение света вместо дополнительной отделки.</li>
+          <li><b>Текстиль — кремовый.</b> Лён, хлопок и шерсть хорошо держат оттенок.</li>
+          <li><b>Акценты — оливковые.</b> Подушки, вазы, ручки, растения.</li>
+          <li><b>Свет.</b> Тёплый 2700–3000K усиливает кремовый и гасит кислотность зелени.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== РЕЦЕПТ =========================== -->
+  <section class="band reveal" id="recipe">
+    <h2>Рецепт идеального использования</h2>
+
+    <div class="recipe">
+      <div class="recipe__col reveal" data-delay="1">
+        <h3 class="tick">Делать</h3>
+        <ul class="list list--tick">
+          <li>Отдавать ~75% площади кремовому и ~25% оливковому.</li>
+          <li>Проверять контраст: минимум 5.4:1 для основного текста.</li>
+          <li>Держать рамки в 2px — это вся графика, которая нужна.</li>
+          <li>Чередовать инверсные секции, чтобы ритм не был плоским.</li>
+          <li>Использовать прозрачности вместо новых оттенков.</li>
+        </ul>
+      </div>
+
+      <div class="recipe__col recipe__col--dark reveal" data-delay="2">
+        <h3 class="tick tick--light">Не делать</h3>
+        <ul class="list list--tick">
+          <li>Добавлять третий цвет «для акцента» — ломается логика.</li>
+          <li>Писать кремовым по оливковому в мелкий кегль.</li>
+          <li>Смешивать оливковый с белым ради «светлоты».</li>
+          <li>Заполнять экран плитками и плашками обеих красок.</li>
+        </ul>
+      </div>
+    </div>
+
+    <blockquote class="quote reveal" data-delay="3">
+      <svg class="art-gem" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+          <path class="art-draw" d="M18 10 H 46 L 58 26 L 32 56 L 6 26 Z"/>
+          <path class="art-draw" d="M6 26 H 58"/>
+          <path class="art-draw" d="M18 10 L 26 26 L 32 56"/>
+          <path class="art-draw" d="M46 10 L 38 26 L 32 56"/>
+          <path class="art-draw" d="M26 26 H 38"/>
+        </g>
+      </svg>
+      «Хорошая палитра — это не два цвета, а два цвета и дисциплина».
+    </blockquote>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <p><b>#606c38</b> × <b>#fefae0</b> — статья на чистом CSS, SVG и нативном JavaScript.</p>
+    <p class="footer__note">Ни одной зависимости, ни одного третьего цвета. <span id="year"></span></p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
